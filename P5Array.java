@@ -10,17 +10,31 @@ class SortArray{
 	String a;
 	int [] iArr;
 
-	//constructor
+	//constructor no parameter
 	SortArray(){
 		a = readNumbers();
 		String [] stArr = makeSArray(a);
 		iArr = convertIntArr(stArr);
-
-		//selectionSort(iArr);
-		//bubbleSort(iArr);
-		insertionSort(iArr);
 	}//constructor
-
+	
+	//constructor string parameter
+	SortArray(String s){
+		a = s;
+		String [] stArr = makeSArray(a);
+		iArr = convertIntArr(stArr);
+	}
+	//constructor
+	
+	//constructor array parameter
+	SortArray(int[] intArr){
+		a = Arrays.toString(intArr);
+		iArr = intArr;
+	}
+	//constructor
+	
+	//methods
+	
+	//readNumbers
 	static String readNumbers(){
 		//read a line form keyboard (a seg of integers)
 		Scanner input = new Scanner(System.in);
@@ -28,14 +42,15 @@ class SortArray{
 		System.out.println("Please input list of numbers: ");
 		String s = input.nextLine();
 
-		//trim front and back
-		s = s.trim();
-		s = s.replaceAll("\\s+", " ");
-
 		return s;
 	}//readNumbers
 
+	//makeSArray
 	static String[] makeSArray(String s){
+		//trim front and back
+		s = s.trim();
+		s = s.replaceAll("\\s+", " ");
+		
 		//split the line into substrings
 		String [] sArr = new String[s.length()];
 		sArr = s.split(" ");
@@ -43,6 +58,7 @@ class SortArray{
 		return sArr;
 	}//makeSArray
 
+	//convertIntArr
 	static int[] convertIntArr(String[] sArr){
 		//convert all substrings to integers
 		int [] iArr = new int[sArr.length];
@@ -56,46 +72,51 @@ class SortArray{
 	}//convertIntArr
 
 	//selectionSort
-	static void selectionSort(int[] arr){
+	void selectionSort(){
 		//Sort the array arr[]
-		for (int i = 0; i < arr.length - 1; i++) { //outer
+		for (int i = 0; i < iArr.length - 1; i++) { //outer
 			int index = i;
-				for (int j = i + 1; j < arr.length; j++)
-					if (arr[j] < arr[index]) index = j;    
-				int smallerNumber = arr[index]; 
-				arr[index] = arr[i];
-				arr[i] = smallerNumber;
+				for (int j = i + 1; j < iArr.length; j++)
+					if (iArr[j] < iArr[index]) index = j;    
+				int smallerNumber = iArr[index]; 
+				iArr[index] = iArr[i];
+				iArr[i] = smallerNumber;
 		}//for i
 	}//selectionSort
 
 	//bubbleSort
-	static void bubbleSort(int[] arr){
+	void bubbleSort(){
 		//Sort the array arr[]
-		for (int i = 0; i<  arr.length - 1; i++) {
-			for (int j = 1; j <  arr.length - i; j++) {
-				if (arr[j-1] > arr[j]) {
+		for (int i = 0; i<  iArr.length - 1; i++) {
+			for (int j = 1; j <  iArr.length - i; j++) {
+				if (iArr[j-1] > iArr[j]) {
 					//swap(j-1, j)
-					int temp = arr[j-1];
-					arr[j-1] = arr[j];
-					arr[j] = temp;
+					int temp = iArr[j-1];
+					iArr[j-1] = iArr[j];
+					iArr[j] = temp;
 				}//if
 			} //for j
 		}//for i
 	}//bubbleSort
 
 	//insertionSort
-	static void insertionSort(int[] arr){
+	void insertionSort(){
 		//Sort the array arr[]
-		for (int i = 1; i < arr.length; i++) { //outer loop
+		for (int i = 1; i < iArr.length; i++) { //outer loop
 			for(int j = i ; j > 0 ; j--){    //inner loop
-				if(arr[j] < arr[j-1]){ 
+				if(iArr[j] < iArr[j-1]){ 
 					//swap (array at j & j-1)
-					int temp = arr[j];
-					arr[j] = arr[j-1];
-					arr[j-1] = temp;
+					int temp = iArr[j];
+					iArr[j] = iArr[j-1];
+					iArr[j-1] = temp;
 				}//if
 			}//for j
 		} //for i
 	}//insertionSort
 
+	//toString
+	public String toString(){
+		return Arrays.toString(iArr);
+	}//toString
+	
 }//class
